@@ -1,0 +1,471 @@
+/* App Layout */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Terminal Header */
+.terminal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+.terminal-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.terminal-logo {
+  font-family: var(--heading);
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  background: linear-gradient(135deg, #fff 30%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.terminal-badge {
+  font-size: 0.75rem;
+  font-family: var(--mono);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  background: var(--accent-bg);
+  color: var(--accent);
+  border: 1px solid rgba(170, 59, 255, 0.3);
+}
+
+.connection-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--text-muted);
+  transition: background-color 0.3s;
+}
+
+.status-dot.connected {
+  background-color: var(--buy);
+  box-shadow: 0 0 8px var(--buy-glow);
+  animation: pulse 2s infinite;
+}
+
+.status-dot.disconnected {
+  background-color: var(--sell);
+  box-shadow: 0 0 8px var(--sell-glow);
+}
+
+/* Main Ticket Card */
+.trading-ticket {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.trading-ticket::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--buy));
+}
+
+.ticket-title {
+  font-family: var(--heading);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-h);
+  margin-bottom: 1.5rem;
+}
+
+/* Form Groups */
+.form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+}
+
+/* Toggle Buttons for Side (BUY/SELL) */
+.side-selector {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.side-btn {
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 0.85rem;
+  border-radius: 8px;
+  font-family: var(--heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.side-btn:hover {
+  background: var(--bg-input-hover);
+  color: var(--text-h);
+}
+
+.side-btn.buy.active {
+  background: var(--buy-bg);
+  color: var(--buy);
+  border-color: var(--buy);
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.15);
+}
+
+.side-btn.sell.active {
+  background: var(--sell-bg);
+  color: var(--sell);
+  border-color: var(--sell);
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.15);
+}
+
+/* Toggle Tabs for Order Type */
+.type-selector {
+  display: flex;
+  background: var(--bg-input);
+  padding: 4px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.type-tab {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  padding: 0.6rem;
+  border-radius: 6px;
+  font-family: var(--heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: uppercase;
+}
+
+.type-tab:hover {
+  color: var(--text-h);
+}
+
+.type-tab.active {
+  background: var(--bg-card);
+  color: var(--accent);
+  box-shadow: var(--shadow);
+}
+
+/* Inputs & Autocomplete Dropdown */
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.trading-input {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  color: var(--text-h);
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.trading-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 8px rgba(170, 59, 255, 0.25);
+  background: var(--bg-input-hover);
+}
+
+.trading-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.input-suffix {
+  position: absolute;
+  right: 1rem;
+  color: var(--text-muted);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  pointer-events: none;
+}
+
+/* Suggestions Dropdown for Symbol */
+.suggestions-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--bg-input-hover);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-top: 4px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 10;
+  list-style: none;
+  box-shadow: var(--shadow);
+}
+
+.suggestion-item {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.suggestion-item:hover {
+  background: var(--border);
+  color: var(--text-h);
+}
+
+.suggestion-name {
+  color: var(--text-muted);
+}
+
+/* Conditional Field Animation */
+.conditional-field {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.conditional-field.visible {
+  max-height: 100px;
+  opacity: 1;
+  margin-bottom: 0.5rem;
+}
+
+/* Primary Action Button */
+.submit-btn {
+  width: 100%;
+  background: linear-gradient(135deg, var(--accent) 0%, #8b2cf5 100%);
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 8px;
+  font-family: var(--heading);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: var(--glow-shadow);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px rgba(170, 59, 255, 0.4);
+}
+
+.submit-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.submit-btn:disabled {
+  background: var(--border);
+  color: var(--text-muted);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Spinner Loader */
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2.5px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 0.8s linear infinite;
+}
+
+/* Receipt / Order Success Card */
+.receipt-card {
+  margin-top: 1rem;
+  background: rgba(16, 185, 129, 0.05);
+  border: 1px dashed var(--buy);
+  border-radius: 12px;
+  padding: 1.5rem;
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.05);
+}
+
+.receipt-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--buy);
+  font-weight: 600;
+}
+
+.receipt-success-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.receipt-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.receipt-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.receipt-val {
+  font-size: 0.85rem;
+  font-family: var(--mono);
+  color: var(--text-h);
+  text-align: right;
+  word-break: break-all;
+}
+
+.order-id-highlight {
+  font-weight: 700;
+  color: var(--buy);
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-h);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  width: max-content;
+  align-self: flex-end;
+}
+
+.btn-secondary:hover {
+  background: var(--bg-input-hover);
+  border-color: var(--text-muted);
+}
+
+/* Error Banner */
+.error-banner {
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  color: #fca5a5;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.error-icon {
+  color: var(--sell);
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+/* Animations */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

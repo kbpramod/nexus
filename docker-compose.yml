@@ -1,0 +1,30 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: nexus-postgres
+    env_file:
+      - .env
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+    container_name: nexus-redis
+    env_file:
+      - .env
+    ports:
+      - "6379:6379"
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: nexus-rabbitmq
+    env_file:
+      - .env
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+volumes:
+  postgres_data:

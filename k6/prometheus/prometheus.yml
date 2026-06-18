@@ -1,0 +1,11 @@
+global:
+  scrape_interval: 5s
+
+# Remote Write from k6 → Prometheus
+remote_write:
+  - url: "http://host.docker.internal:9090/api/v1/write"
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ["localhost:9090"]

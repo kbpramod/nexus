@@ -1,0 +1,175 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PROM_DS"
+      },
+      "description": "Number of K6 VUs active (virtual users)",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 7, "w": 8, "x": 0, "y": 0 },
+      "id": 1,
+      "options": {
+        "legend": { "displayMode": "list", "placement": "bottom" }
+      },
+      "title": "K6: Virtual Users",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "k6_vus",
+          "legendFormat": "vus",
+          "refId": "A"
+        }
+      ]
+    },
+
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PROM_DS"
+      },
+      "description": "K6 HTTP request rate (RPS)",
+      "gridPos": { "h": 7, "w": 8, "x": 8, "y": 0 },
+      "id": 2,
+      "title": "K6: HTTP Requests/sec",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "rate(k6_http_reqs[30s])",
+          "legendFormat": "http_rps",
+          "refId": "A"
+        }
+      ]
+    },
+
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PROM_DS"
+      },
+      "description": "BullMQ queue waiting jobs",
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 7 },
+      "id": 3,
+      "title": "BullMQ: Waiting Jobs",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "bull_queue_waiting",
+          "legendFormat": "{{queue}} waiting",
+          "refId": "A"
+        }
+      ]
+    },
+
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PROM_DS"
+      },
+      "description": "BullMQ completed jobs",
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 7 },
+      "id": 4,
+      "title": "BullMQ: Completed Jobs",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "bull_queue_completed_total",
+          "legendFormat": "{{queue}} completed",
+          "refId": "A"
+        }
+      ]
+    },
+
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PROM_DS"
+      },
+      "description": "WebSocket active connections",
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 15 },
+      "id": 5,
+      "title": "WS: Active Connections",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "ws_active_connections",
+          "legendFormat": "connections",
+          "refId": "A"
+        }
+      ]
+    },
+
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PROM_DS"
+      },
+      "description": "Redis Memory Usage",
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 15 },
+      "id": 6,
+      "title": "Redis Memory (MB)",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "redis_memory_used_bytes / 1024 / 1024",
+          "legendFormat": "memory_mb",
+          "refId": "A"
+        }
+      ]
+    },
+
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PROM_DS"
+      },
+      "description": "API latency in milliseconds",
+      "gridPos": { "h": 9, "w": 24, "x": 0, "y": 23 },
+      "id": 7,
+      "title": "API Latency (ms)",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "rate(k6_http_req_duration_ms_sum[1m]) / rate(k6_http_req_duration_ms_count[1m])",
+          "legendFormat": "latency_ms",
+          "refId": "A"
+        }
+      ]
+    }
+  ],
+  "schemaVersion": 36,
+  "style": "dark",
+  "tags": ["k6", "queue", "performance", "bullmq"],
+  "templating": {
+    "list": []
+  },
+  "title": "Order Engine Performance Dashboard",
+  "uid": "order-engine-dashboard-001",
+  "version": 1,
+  "weekStart": ""
+}
